@@ -17,9 +17,14 @@ public class GameLogic : NonStaticWrapper<GameLogic>
 		SetStatic(GameLogicStaticInstanceField, Inner);
 	}
 
-	public void SetPlatform(int value)
+	public void SetRenderer(RendererType type)
 	{
-		Set(GameLogicPlatformField, value);
+		Set(GameLogicRendererField, type);
+	}
+
+	public void CreateWindow(string title, int width, int height, int display)
+	{
+		_ = Call(GameLogicCreateWindowFunction, title, width, height, display)!;
 	}
 
 	public void InitializeFonts()

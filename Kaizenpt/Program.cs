@@ -97,8 +97,9 @@ public static class Program
 		Wrappers.Meta.Globals.KaizenDirectory = kaizenDirectory;
 		GameLogic gameLogic = new();
 		gameLogic.SetStaticInstanceToSelf();
-		gameLogic.SetPlatform(platform);
-		TextureHelper.DoStuff(platform);
+		gameLogic.SetRenderer(rendererType);
+		Renderer.Initialize(rendererType);
+		gameLogic.CreateWindow(nameof(Program), 1366, 768, 0); // Only needed if using OpenGL
 		TexturePathHelper.InitMainGameTexturePaths();
 		TextureLoader.LoadTexturesNoCallbacks();
 		FontLoaderHelper.DoStuff();

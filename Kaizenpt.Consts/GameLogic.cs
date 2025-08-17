@@ -14,7 +14,7 @@ public static partial class Consts
 	public const string GameLogicStaticInstanceField = "#=qZPQSy2W0dAye577g3hFglA==";
 
 	/// <summary>
-	/// GameLogic field for the current platform (Windows/other).
+	/// GameLogic field for the current renderer.
 	/// </summary>
 	/// <remarks>
 	/// How to find:<br/>
@@ -22,9 +22,19 @@ public static partial class Consts
 	/// 2. First private field, is a private enum type, should be right below instance field<br/>
 	/// <br/>
 	/// Possible enum values:<br/>
-	/// 1 if windows, 0 otherwise
+	/// 0 - OpenGL, 1 - Direct3D
 	/// </remarks>
-	public const string GameLogicPlatformField = "#=qqvF9clevUelG0s3_w0EpgEdDxkzdr$uvliuQIy2luT0=";
+	public const string GameLogicRendererField = "#=qqvF9clevUelG0s3_w0EpgEdDxkzdr$uvliuQIy2luT0=";
+
+	/// <summary>
+	/// GameLogic function that creates a window.
+	/// </summary>
+	/// <remarks>
+	/// How to find:<br/>
+	/// 1. Find the GameLogic class<br/>
+	/// 2. Find the function with <c>(string, int, int, int)</c> arguments. Inside, it should call SDL_CreateWindow
+	/// </remarks>
+	public const string GameLogicCreateWindowFunction = "#=qLebKSt43g3urY$ICao7xVQ==";
 
 	/// <summary>
 	/// The helper class that does some needed font/language related stuff for GameLogic instance.

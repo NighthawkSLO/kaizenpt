@@ -11,12 +11,3 @@ public class TextureLoader : StaticWrapper<TextureLoader>
 		_ = CallStatic(LoadTexturesNoCallbacksFunction)!;
 	}
 }
-
-[TypeWrapper(TextureHelperClass)]
-public class TextureHelper : StaticWrapper<TextureHelper>
-{
-	public static void DoStuff(int platform)
-	{
-		_ = CallStatic(TextureHelperFunction, platform)!;
-	}
-}
