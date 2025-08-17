@@ -14,7 +14,7 @@ public enum MappedField
 	GameLogicStaticInstanceField,
 
 	/// <summary>
-	/// GameLogic field for the current platform (Windows/other).
+	/// GameLogic field for the current renderer.
 	/// </summary>
 	/// <remarks>
 	/// How to find:<br/>
@@ -22,9 +22,9 @@ public enum MappedField
 	/// 2. First private field, is a private enum type, should be right below instance field<br/>
 	/// <br/>
 	/// Possible enum values:<br/>
-	/// 1 if windows, 0 otherwise
+	/// 0 - OpenGL, 1 - Direct3D
 	/// </remarks>
-	GameLogicPlatformField,
+	GameLogicRendererField,
 
 	/// <summary>
 	/// Sim field that has a value when the simulation is finished.

@@ -177,18 +177,6 @@ public enum MappedFunction
 	LoadTexturesNoCallbacksFunction,
 
 	/// <summary>
-	/// A function from a static helper class that does a needed texture related thing based on current platform.
-	/// </summary>
-	/// <remarks>
-	/// How to find:<br/>
-	/// 1. Entry point<br/>
-	/// 2. Game logic initialization function<br/>
-	/// 3. The function called that references the current platform (<see cref="MappedField.GameLogicPlatformField"/>)<br/>
-	/// 4. Verify that the function is <c>static void</c> and has an enum argument<br/>
-	/// </remarks>
-	TextureHelperFunction,
-
-	/// <summary>
 	/// Tool function that returns the cost.
 	/// </summary>
 	/// <remarks>
@@ -197,4 +185,26 @@ public enum MappedFunction
 	/// 2. Look for the function that returns an integer
 	/// </remarks>
 	ToolCostFunction,
+
+	/// <summary>
+	/// Initialize function from a static helper class that initializes the graphics library.
+	/// </summary>
+	/// <remarks>
+	/// How to find:<br/>
+	/// 1. Entry point<br/>
+	/// 2. Game logic initialization function<br/>
+	/// 3. The function called that references the current renderer (<see cref="MappedField.GameLogicRendererField"/>)<br/>
+	/// 4. Verify that the function is <c>static void</c> and has an enum argument<br/>
+	/// </remarks>
+	RendererInitializeFunction,
+
+	/// <summary>
+	/// GameLogic function that creates a window.
+	/// </summary>
+	/// <remarks>
+	/// How to find:<br/>
+	/// 1. Find the GameLogic class<br/>
+	/// 2. Find the function with <c>(string, int, int, int)</c> arguments. Inside, it should call SDL_CreateWindow
+	/// </remarks>
+	GameLogicCreateWindowFunction,
 }

@@ -93,15 +93,7 @@ public static class Program
 		};
 
 		HarmonyLib.Harmony harmony = new(nameof(Program));
-		try
-		{
-			harmony.PatchAll(Assembly.GetExecutingAssembly());
-		}
-		catch (HarmonyLib.HarmonyException)
-		{
-			Console.Error.WriteLine($"Failed to patch assembly - Undefined target methods. Make sure you are running Kaizen version {Consts.Version}");
-			return false;
-		}
+		harmony.PatchAll(Assembly.GetExecutingAssembly());
 
 		const RendererType rendererType = RendererType.OpenGl;
 

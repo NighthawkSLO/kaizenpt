@@ -98,6 +98,11 @@ public static class MappedMembers
 					x.GetMethodBody()!.ExceptionHandlingClauses.Count == 0 &&
 					x.GetMethodBody()!.LocalVariables.Count == 0 &&
 					x.GetMethodBody()!.GetILAsByteArray()!.Length == 31);
+		var gameLogicCreateWindowFunction = gameLogicType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+			.Single(x => x.GetParameters().Length == 4 && x.GetParameters()[0].ParameterType == typeof(string) &&
+			             x.GetParameters()[1].ParameterType == typeof(int) &&
+			             x.GetParameters()[2].ParameterType == typeof(int) &&
+			             x.GetParameters()[3].ParameterType == typeof(int));
 
 		var puzzleClass = gameLogicType.Assembly.GetTypes().Single(x => x.Name == "Puzzle");
 		var puzzleIdField = puzzleClass.GetFields(BindingFlags.Public | BindingFlags.Instance)
@@ -165,11 +170,11 @@ public static class MappedMembers
 			.Single(x => x.ReturnType == typeof(bool) && x.GetParameters().Length == 0);
 
 		var bounds2Class = gameLogicType.Assembly.GetTypes().Single(x => x.Name == "Bounds2");
-		var textureHelperClass = gameLogicType.Assembly.GetTypes().Single(x =>
+		var rendererClass = gameLogicType.Assembly.GetTypes().Single(x =>
 			x.IsStatic() && x.GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Any(y =>
 				y.ReturnType == typeof(bool) && y.GetParameters().Length == 2 &&
 				y.GetParameters().All(z => z.ParameterType == bounds2Class)));
-		var textureHelperFunction = textureHelperClass.GetMethods(BindingFlags.Public | BindingFlags.Static)
+		var rendererInitializeFunction = rendererClass.GetMethods(BindingFlags.Public | BindingFlags.Static)
 			.Single(x => x.ReturnType == typeof(void) && x.GetParameters().Length == 1 &&
 			             x.GetParameters()[0].ParameterType.IsEnum && x.GetMethodBody()!.MaxStackSize == 2);
 
@@ -190,6 +195,7 @@ public static class MappedMembers
 			[MappedFunction.FontLoaderHelperFunction] = fontLoaderHelperFunction,
 			[MappedFunction.GameLogicInitializeFontsFunction] = gameLogicInitializeFontsFunction,
 			[MappedFunction.GameLogicInitializePuzzlesFunction] = gameLogicInitializePuzzlesFunction,
+			[MappedFunction.GameLogicCreateWindowFunction] = gameLogicCreateWindowFunction,
 			[MappedFunction.MaybeIntIsSomeFunction] = maybeIntIsSomeFunction,
 			[MappedFunction.MaybeIntUnwrapFunction] = maybeIntUnwrapFunction,
 			[MappedFunction.MaybeSolutionIsSomeFunction] = maybeSolutionIsSomeFunction,
@@ -200,14 +206,14 @@ public static class MappedMembers
 			[MappedFunction.InitGameTexturePathsInstanceFunction] = initGameTexturePathsInstanceFunction,
 			[MappedFunction.InitMainGameTexturePathsFunction] = initMainGameTexturePathsFunction,
 			[MappedFunction.LoadTexturesNoCallbacksFunction] = loadTexturesNoCallbacksFunction,
-			[MappedFunction.TextureHelperFunction] = textureHelperFunction,
+			[MappedFunction.RendererInitializeFunction] = rendererInitializeFunction,
 			[MappedFunction.ToolCostFunction] = toolCostFunction,
 		};
 
 		_mappedFields = new Dictionary<MappedField, FieldInfo>
 		{
 			[MappedField.GameLogicStaticInstanceField] = gameLogicStaticInstanceField,
-			[MappedField.GameLogicPlatformField] = rendererTypeField,
+			[MappedField.GameLogicRendererField] = rendererTypeField,
 			[MappedField.SimulationFinishedField] = simulationFinishedField,
 			[MappedField.SimulationUsedAreaField] = simulationUsedAreaField,
 			[MappedField.SolutionPuzzleField] = solutionPuzzleField,
@@ -223,7 +229,6 @@ public static class MappedMembers
 			[MappedClass.FontLoaderHelperClass] = fontLoaderHelperClass,
 			[MappedClass.TexturePathHelperClass] = texturePathHelperClass,
 			[MappedClass.InitGameTexturePathsClass] = initGameTexturePathsClass,
-			[MappedClass.TextureHelperClass] = textureHelperClass,
 			[MappedClass.FactoryClass] = factoryClass,
 			[MappedClass.SolutionClass] = solutionClass,
 			[MappedClass.SimClass] = simClass,
@@ -237,6 +242,7 @@ public static class MappedMembers
 			[MappedClass.GameLogicClass] = gameLogicType,
 			[MappedClass.MaybeIntClass] = maybeIntClass,
 			[MappedClass.TextureLoader] = textureLoaderClass,
+			[MappedClass.RendererClass] = rendererClass,
 		};
 
 		_mappedProperties = new Dictionary<MappedProperty, PropertyInfo>
