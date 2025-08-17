@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace Kaizenpt;
+namespace Kaizenpt.Simulator;
 
 [HarmonyPatch]
 internal static class PatchGameLogicStaticConstructor

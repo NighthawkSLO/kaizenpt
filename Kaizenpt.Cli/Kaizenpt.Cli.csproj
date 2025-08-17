@@ -9,7 +9,7 @@
 		<AnalysisLevel>latest-all</AnalysisLevel>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
-		<RootNamespace>Kaizenpt</RootNamespace>
+		<RootNamespace>Kaizenpt.Cli</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="../Kaizenpt.Consts/Kaizenpt.Consts.csproj" />

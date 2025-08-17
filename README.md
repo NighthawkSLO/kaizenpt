@@ -16,6 +16,11 @@ Or
 dotnet run --project Kaizenpt -- -e <game directory> -d <solution folder(s)>
 ```
 
+You can specify the renderer mode with the `-r` option (has to be either OpenGl or Direct3D). The default is OpenGl.
+```sh
+dotnet run --project Kaizenpt -- -e <game directory> -r Direct3D <solution file(s)>
+```
+
 This outputs json with the following format:
 
 ```json
