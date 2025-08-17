@@ -63,7 +63,10 @@ public static class Program
 
 	private static void InnerMain(Arguments arguments)
 	{
-		Initialize(arguments.KaizenDirectory);
+		if (!Initialize(arguments.KaizenDirectory))
+		{
+			return;
+		}
 
 		IEnumerable<string> solutionPaths = arguments.UseDirectory
 			? arguments.SolutionPaths.SelectMany(
@@ -74,7 +77,7 @@ public static class Program
 		Console.WriteLine(JsonConvert.SerializeObject(solutionPaths.Distinct().Select(Simulate)));
 	}
 
-	public static void Initialize(string kaizenDirectory)
+	public static bool Initialize(string kaizenDirectory)
 	{
 		AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
 		{
@@ -90,9 +93,17 @@ public static class Program
 		};
 
 		HarmonyLib.Harmony harmony = new(nameof(Program));
-		harmony.PatchAll(Assembly.GetExecutingAssembly());
+		try
+		{
+			harmony.PatchAll(Assembly.GetExecutingAssembly());
+		}
+		catch (HarmonyLib.HarmonyException)
+		{
+			Console.Error.WriteLine($"Failed to patch assembly - Undefined target methods. Make sure you are running Kaizen version {Consts.Version}");
+			return false;
+		}
 
-		int platform = 1;
+		const RendererType rendererType = RendererType.OpenGl;
 
 		Wrappers.Meta.Globals.KaizenDirectory = kaizenDirectory;
 		GameLogic gameLogic = new();
@@ -105,6 +116,8 @@ public static class Program
 		FontLoaderHelper.DoStuff();
 		gameLogic.InitializeFonts();
 		gameLogic.InitializePuzzles();
+
+		return true;
 	}
 
 	public static SolutionData Simulate(string solutionFile)
