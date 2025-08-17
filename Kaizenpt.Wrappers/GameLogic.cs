@@ -6,7 +6,7 @@ namespace Kaizenpt.Wrappers;
 [TypeWrapper("GameLogic")]
 public class GameLogic : NonStaticWrapper<GameLogic>
 {
-	public GameLogic(object inner)
+	internal GameLogic(object inner)
 		: base(inner) { }
 
 	public GameLogic()
