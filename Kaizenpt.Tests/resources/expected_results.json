@@ -1,0 +1,82 @@
+{
+	"empty-file": {
+	},
+	"invalid-file": {
+	},
+	"incomplete": {
+		"puzzleId": 5
+	},
+	"has-error": {
+		"puzzleId": 5
+	},
+	"instructions-past-finish": {
+		"puzzleId": 5,
+		"statistics": {
+			"time": 4,
+			"cost": 23,
+			"size": 50,
+			"width": 5,
+			"height": 10
+		}
+	},
+	"clears/corporate-binder-1": {
+		"puzzleId": 6,
+		"statistics": {
+			"time": 4,
+			"cost": 38,
+			"size": 130,
+			"width": 13,
+			"height": 10
+		}
+	},
+	"clears/defender-bot-1": {
+		"puzzleId": 5,
+		"statistics": {
+			"time": 2,
+			"cost": 23,
+			"size": 50,
+			"width": 5,
+			"height": 10
+		}
+	},
+	"clears/field-binoculars-1": {
+		"puzzleId": 4,
+		"statistics": {
+			"time": 2,
+			"cost": 18,
+			"size": 30,
+			"width": 5,
+			"height": 6
+		}
+	},
+	"clears/portable-radio-1": {
+		"puzzleId": 2,
+		"statistics": {
+			"time": 1,
+			"cost": 10,
+			"size": 18,
+			"width": 6,
+			"height": 3
+		}
+	},
+	"clears/sport-watch-1": {
+		"puzzleId": 3,
+		"statistics": {
+			"time": 2,
+			"cost": 13,
+			"size": 28,
+			"width": 4,
+			"height": 7
+		}
+	},
+	"clears/world-clock-1": {
+		"puzzleId": 1,
+		"statistics": {
+			"time": 1,
+			"cost": 13,
+			"size": 32,
+			"width": 8,
+			"height": 4
+		}
+	}
+}
