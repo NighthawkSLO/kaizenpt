@@ -12,8 +12,13 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
 		<PackageReference Include="NUnit" Version="3.14.0" />
 		<PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-		<ProjectReference Include="../Kaizenpt/Kaizenpt.csproj" />
+		<PackageReference Include="dotenv.net" Version="4.0.0"/>
+		<ProjectReference Include="../Kaizenpt.Cli/Kaizenpt.Cli.csproj" />
+		<ProjectReference Include="../Kaizenpt.Simulator/Kaizenpt.Simulator.csproj" />
 		<Using Include="NUnit.Framework" />
+		<Content Include=".env">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<None Update="resources/**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

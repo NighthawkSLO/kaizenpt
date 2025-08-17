@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<PlatformTarget>anycpu</PlatformTarget>
+		<Version>0.1.0</Version>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AnalysisLevel>latest-all</AnalysisLevel>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Nullable>enable</Nullable>
+		<RootNamespace>Kaizenpt</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="../Kaizenpt.Consts/Kaizenpt.Consts.csproj" />
+		<ProjectReference Include="../Kaizenpt.Wrappers/Kaizenpt.Wrappers.csproj" />
+		<ProjectReference Include="..\Kaizenpt.Simulator\Kaizenpt.Simulator.csproj" />
+		<PackageReference Include="CommandLineParser" Version="2.9.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+</Project>

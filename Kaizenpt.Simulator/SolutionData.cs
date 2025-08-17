@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Kaizenpt;
+namespace Kaizenpt.Simulator;
 
 [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
 public record SolutionData : IEquatable<SolutionData>

@@ -1,4 +1,7 @@
 ﻿using System.Diagnostics;
+using dotenv.net;
+using Kaizenpt.Simulator;
+using Kaizenpt.Wrappers;
 using Newtonsoft.Json.Linq;
 
 namespace Kaizenpt.Tests;
@@ -8,10 +11,9 @@ internal static class Test
 	[Test]
 	public static void Simulate()
 	{
-		Program.Initialize(
-			Environment.GetEnvironmentVariable("KAIZEN_DIR")
-				?? throw new MissingEnvironmentVariableException(@"Environment variable ""KAIZEN_DIR"" not set")
-		);
+		DotEnv.Load();
+		var simulator = new KaizenSimulator(Environment.GetEnvironmentVariable("KAIZEN_DIR")
+		                                    ?? throw new MissingEnvironmentVariableException(@"Environment variable ""KAIZEN_DIR"" not set"), RendererType.OpenGl);
 
 		JObject expectedResults = JObject.Parse(File.ReadAllText("resources/expected_results.json"))!;
 		foreach (string solutionFile in Directory.EnumerateFiles("resources/solutions", "*.solution", SearchOption.AllDirectories))
@@ -29,7 +31,7 @@ internal static class Test
 			);
 
 			Stopwatch stopwatch = Stopwatch.StartNew();
-			SolutionData result = Program.Simulate(solutionFile);
+			SolutionData result = simulator.Simulate(solutionFile);
 			stopwatch.Stop();
 			TestContext.Progress.WriteLine($@"Solution ""{solutionFile}"" finished in {stopwatch.Elapsed}");
 

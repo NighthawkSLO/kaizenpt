@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizenpt", "Kaizenpt\Kaizenpt.csproj", "{58C576D4-2576-4DC4-A1D9-773CF1B58F5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizenpt.Cli", "Kaizenpt.Cli\Kaizenpt.Cli.csproj", "{58C576D4-2576-4DC4-A1D9-773CF1B58F5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizenpt.Wrappers", "Kaizenpt.Wrappers\Kaizenpt.Wrappers.csproj", "{EBD4D210-90A3-48A4-9786-C8834B181146}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizenpt.Tests", "Kaizenpt.Tests\Kaizenpt.Tests.csproj", "{12D86340-13BE-41AB-8491-96D75D3205F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizenpt.Consts", "Kaizenpt.Consts\Kaizenpt.Consts.csproj", "{CBA5FB48-2986-4563-899D-1C49A98095D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaizenpt.Simulator", "Kaizenpt.Simulator\Kaizenpt.Simulator.csproj", "{88055658-E3DF-4F37-86C6-D9D0F9189A38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CBA5FB48-2986-4563-899D-1C49A98095D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBA5FB48-2986-4563-899D-1C49A98095D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBA5FB48-2986-4563-899D-1C49A98095D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88055658-E3DF-4F37-86C6-D9D0F9189A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88055658-E3DF-4F37-86C6-D9D0F9189A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88055658-E3DF-4F37-86C6-D9D0F9189A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88055658-E3DF-4F37-86C6-D9D0F9189A38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

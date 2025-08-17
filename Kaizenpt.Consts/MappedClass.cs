@@ -126,7 +126,7 @@ public enum MappedClass
 	/// How to find:<br/>
 	/// 1. Entry point<br/>
 	/// 2. Game logic initialization function<br/>
-	/// 3. The function called that references the current renderer (<see cref="GameLogicRendererField"/>)<br/>
+	/// 3. The function called that references the current renderer (<see cref="MappedField.GameLogicRendererField"/>)<br/>
 	/// 4. Verify that the function is <c>static void</c> and has an enum argument<br/>
 	/// 5. This is the <c>static class</c> of the function
 	/// </remarks>
