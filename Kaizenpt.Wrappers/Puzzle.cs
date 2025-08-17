@@ -1,9 +1,9 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers;
 
-[TypeWrapper("Puzzle")]
+[TypeWrapper(MappedClass.PuzzleClass)]
 public class Puzzle : NonStaticWrapper<Puzzle>
 {
 	internal Puzzle(object inner)
@@ -11,6 +11,6 @@ public class Puzzle : NonStaticWrapper<Puzzle>
 
 	public int GetId()
 	{
-		return (int)Get(PuzzleIdFunction)!;
+		return (int)Get(MappedField.PuzzleIdField)!;
 	}
 }

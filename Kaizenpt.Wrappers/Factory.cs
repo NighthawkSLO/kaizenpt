@@ -1,9 +1,9 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers;
 
-[TypeWrapper("Factory")]
+[TypeWrapper(MappedClass.FactoryClass)]
 public class Factory : NonStaticWrapper<Factory>
 {
 	internal Factory(object inner)
@@ -11,12 +11,12 @@ public class Factory : NonStaticWrapper<Factory>
 
 	public int GetInstructionLength()
 	{
-		return (int)Call(FactoryInstructionLenFunction)!;
+		return (int)Call(MappedFunction.FactoryInstructionLenFunction)!;
 	}
 
 	public IEnumerable<Tool> GetTools()
 	{
-		IEnumerable<object> objects = (IEnumerable<object>)Call(FactoryToolsFunction)!;
+		IEnumerable<object> objects = (IEnumerable<object>)Call(MappedFunction.FactoryToolsFunction)!;
 		return objects.Select(obj => new Tool(obj));
 	}
 }

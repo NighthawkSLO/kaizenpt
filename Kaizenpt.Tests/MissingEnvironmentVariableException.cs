@@ -1,6 +1,6 @@
 namespace Kaizenpt.Tests;
 
-internal sealed class MissingEnvironmentVariableException : Exception
+public class MissingEnvironmentVariableException : Exception
 {
 	public MissingEnvironmentVariableException() { }
 

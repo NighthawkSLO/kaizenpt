@@ -1,12 +1,12 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers;
 
-[TypeWrapper("GameLogic")]
+[TypeWrapper(MappedClass.GameLogicClass)]
 public class GameLogic : NonStaticWrapper<GameLogic>
 {
-	internal GameLogic(object inner)
+	public GameLogic(object inner)
 		: base(inner) { }
 
 	public GameLogic()
@@ -14,26 +14,21 @@ public class GameLogic : NonStaticWrapper<GameLogic>
 
 	public void SetStaticInstanceToSelf()
 	{
-		SetStatic(GameLogicStaticInstanceField, Inner);
+		SetStatic(MappedField.GameLogicStaticInstanceField, Inner);
 	}
 
-	public void SetRenderer(RendererType type)
+	public void SetPlatform(int value)
 	{
-		Set(GameLogicRendererField, type);
-	}
-
-	public void CreateWindow(string title, int width, int height, int display)
-	{
-		_ = Call(GameLogicCreateWindowFunction, title, width, height, display)!;
+		Set(MappedField.GameLogicPlatformField, value);
 	}
 
 	public void InitializeFonts()
 	{
-		_ = Call(GameLogicInitializeFontsFunction)!;
+		_ = Call(MappedFunction.GameLogicInitializeFontsFunction)!;
 	}
 
 	public void InitializePuzzles()
 	{
-		_ = Call(GameLogicInitializePuzzlesFunction)!;
+		_ = Call(MappedFunction.GameLogicInitializePuzzlesFunction)!;
 	}
 }

@@ -1,10 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Kaizenpt;
 
-[SuppressMessage("Microsoft.Performance", "CA1515")]
 [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
 public record SolutionData : IEquatable<SolutionData>
 {
@@ -19,7 +17,6 @@ public record SolutionData : IEquatable<SolutionData>
 	public SolutionStatistics? Statistics { get; set; }
 }
 
-[SuppressMessage("Microsoft.Performance", "CA1515")]
 [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
 public record SolutionStatistics
 {

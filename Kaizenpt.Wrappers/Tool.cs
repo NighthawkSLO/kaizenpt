@@ -1,9 +1,9 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers;
 
-[TypeWrapper("Tool")]
+[TypeWrapper(MappedClass.ToolClass)]
 public class Tool : NonStaticWrapper<Tool>
 {
 	internal Tool(object inner)
@@ -11,6 +11,6 @@ public class Tool : NonStaticWrapper<Tool>
 
 	public int GetCost()
 	{
-		return (int)Call(ToolCostFunction)!;
+		return (int)Call(MappedFunction.ToolCostFunction)!;
 	}
 }

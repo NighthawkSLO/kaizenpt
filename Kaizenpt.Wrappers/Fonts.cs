@@ -1,13 +1,13 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers;
 
-[TypeWrapper(FontLoaderHelperClass)]
+[TypeWrapper(MappedClass.FontLoaderHelperClass)]
 public class FontLoaderHelper : StaticWrapper<FontLoaderHelper>
 {
 	public static void DoStuff()
 	{
-		_ = CallStatic(FontLoaderHelperFunction)!;
+		_ = CallStatic(MappedFunction.FontLoaderHelperFunction)!;
 	}
 }

@@ -69,8 +69,8 @@ public static class Program
 		}
 
 		IEnumerable<string> solutionPaths = arguments.UseDirectory
-			? arguments.SolutionPaths.SelectMany(
-				path => Directory.EnumerateFiles(path, "*.solution", SearchOption.AllDirectories)
+			? arguments.SolutionPaths.SelectMany(path =>
+				Directory.EnumerateFiles(path, "*.solution", SearchOption.AllDirectories)
 			)
 			: arguments.SolutionPaths;
 
@@ -106,6 +106,7 @@ public static class Program
 		const RendererType rendererType = RendererType.OpenGl;
 
 		Wrappers.Meta.Globals.KaizenDirectory = kaizenDirectory;
+		Directory.SetCurrentDirectory(kaizenDirectory);
 		GameLogic gameLogic = new();
 		gameLogic.SetStaticInstanceToSelf();
 		gameLogic.SetRenderer(rendererType);
@@ -139,10 +140,10 @@ public static class Program
 		// At least 2 steps for puzzles with no instructions (portable radio)
 		int maxSteps = Math.Max(2, factory.GetInstructionLength() + 1);
 
-		Simulation simulation = Simulation.FromSolution(solution);
-		simulation.Run(maxSteps);
+		Sim sim = Sim.FromSolution(solution);
+		sim.Run(maxSteps);
 
-		int solvedOnStep = simulation.GetSolvedOnStep();
+		int solvedOnStep = sim.GetSolvedOnStep();
 
 		if (solvedOnStep < 0)
 		{
@@ -154,7 +155,7 @@ public static class Program
 			};
 		}
 
-		Index2 usedArea = simulation.GetUsedArea();
+		Index2 usedArea = sim.GetUsedArea();
 		int width = usedArea.GetX();
 		int height = usedArea.GetY();
 		int area = width * height;
