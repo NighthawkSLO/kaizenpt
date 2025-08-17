@@ -1,74 +1,64 @@
 using System.Reflection;
+using Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers.Meta;
 
-public abstract class NonStaticWrapper<T>(object inner) : Wrapper<T>
+public abstract class NonStaticWrapper<T>(object inner) : Wrapper<T>(inner)
 {
-	protected internal object Inner { get; private set; } = inner;
-
-	protected object? Get(string fieldName)
-	{
-		return Utils.Get(Inner, fieldName);
-	}
-
-	protected void Set(string fieldName, object? value)
-	{
-		Utils.Set(Inner, fieldName, value);
-	}
-
-	protected object? GetProperty(string propertyName)
-	{
-		return Utils.GetProperty(Inner, propertyName);
-	}
-
-	protected void SetProperty(string propertyName, object? value)
-	{
-		Utils.SetProperty(Inner, propertyName, value);
-	}
-
-	protected object? Call(string methodName, params object[] arguments)
-	{
-		return Utils.WithWorkingDirectory(
-			Globals.KaizenDirectory!,
-			() => Utils.CallNonStatic(Inner, methodName, arguments)
-		);
-	}
-
 	protected static object? CallConstructor(params object[] arguments)
 	{
-		return Utils.CallConstructor(WrappedType, arguments);
+		ConstructorInfo constructor =
+			WrappedType.GetConstructor([.. arguments.Select(a => a.GetType())])
+			?? throw new FindMemberException($@"Failed to find constructor for type ""${WrappedType.AssemblyQualifiedName}""");
+		return constructor.Invoke(BindingFlags.DoNotWrapExceptions, null, arguments, null);
 	}
 }
 
 public abstract class StaticWrapper<T> : Wrapper<T>
 {
-	internal StaticWrapper()
-	{
-		throw new MethodAccessException("Types inheriting from StaticWrapper should not be instantiated.");
-	}
 }
 
 public class Wrapper<T>
 {
-	private static readonly Type? _wrappedType = GetWrappedType();
-	protected static Type WrappedType => _wrappedType!;
-
-	static Wrapper()
+	public Wrapper(object inner)
 	{
-		HarmonyLib.Harmony harmony = new(nameof(T));
-		foreach (MethodInfo method in typeof(T).GetMethods(BindingFlags.NonPublic | BindingFlags.Static))
-		{
-			MethodWrapperAttribute? wrapperAttribute = method.GetCustomAttribute<MethodWrapperAttribute>();
-			if (wrapperAttribute is not null)
-			{
-				_ = harmony
-					.CreateReversePatcher(WrappedType.GetMethod(wrapperAttribute.InnerMethodName), method)
-					.Patch();
-			}
-		}
+		Inner = inner;
 	}
 
-	private static Type? GetWrappedType()
+	public Wrapper()
+	{
+		Inner = null;
+	}
+
+	protected static Type WrappedType { get; } = GetWrappedType();
+
+	public object? Inner { get; }
+
+	protected object? Get(MappedField field)
+	{
+		var fieldInfo = MappedMembers.MappedFields[field];
+		return fieldInfo.GetValue(Inner);
+	}
+
+	protected void Set(MappedField field, object? value)
+	{
+		var fieldInfo = MappedMembers.MappedFields[field];
+		fieldInfo.SetValue(Inner, value);
+	}
+
+	protected object? Get(MappedProperty property)
+	{
+		var propertyInfo = MappedMembers.MappedProperties[property];
+		return propertyInfo.GetValue(Inner);
+	}
+
+	protected object? Call(MappedFunction method, params object[] arguments)
+	{
+		var methodInfo = MappedMembers.MappedFunctions[method];
+		return methodInfo.Invoke(Inner, arguments);
+	}
+
+	private static Type GetWrappedType()
 	{
 		TypeWrapperAttribute? classWrapperAttribute = typeof(T).GetCustomAttribute<TypeWrapperAttribute>();
 		return classWrapperAttribute is not null
@@ -76,21 +66,21 @@ public class Wrapper<T>
 			: throw new MissingAttributeException($"Missing {nameof(TypeWrapperAttribute)} on {typeof(T).FullName}");
 	}
 
-	protected static object? GetStatic(string fieldName)
+	protected static object? GetStatic(MappedField field)
 	{
-		return Utils.GetStatic(WrappedType, fieldName);
+		var fieldInfo = MappedMembers.MappedFields[field];
+		return fieldInfo.GetValue(null);
 	}
 
-	protected static void SetStatic(string fieldName, object? value)
+	protected static void SetStatic(MappedField field, object? value)
 	{
-		Utils.SetStatic(WrappedType, fieldName, value);
+		var fieldInfo = MappedMembers.MappedFields[field];
+		fieldInfo.SetValue(null, value);
 	}
 
-	protected static object? CallStatic(string methodName, params object[] arguments)
+	protected static object? CallStatic(MappedFunction function, params object[] arguments)
 	{
-		return Utils.WithWorkingDirectory(
-			Globals.KaizenDirectory!,
-			() => Utils.CallStatic(WrappedType, methodName, arguments)
-		);
+		var methodInfo = MappedMembers.MappedFunctions[function];
+		return methodInfo.Invoke(null, arguments);
 	}
 }

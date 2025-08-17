@@ -1,13 +1,13 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers;
 
-[TypeWrapper("TextureLoader")]
+[TypeWrapper(MappedClass.TextureLoader)]
 public class TextureLoader : StaticWrapper<TextureLoader>
 {
 	public static void LoadTexturesNoCallbacks()
 	{
-		_ = CallStatic(LoadTexturesNoCallbacksFunction)!;
+		_ = CallStatic(MappedFunction.LoadTexturesNoCallbacksFunction)!;
 	}
 }

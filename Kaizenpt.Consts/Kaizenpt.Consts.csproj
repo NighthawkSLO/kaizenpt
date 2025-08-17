@@ -4,7 +4,6 @@
 		<PlatformTarget>anycpu</PlatformTarget>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<AnalysisLevel>latest-all</AnalysisLevel>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>

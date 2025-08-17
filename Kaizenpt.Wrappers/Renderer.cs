@@ -1,13 +1,13 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
 namespace Kaizenpt.Wrappers;
 
-[TypeWrapper(RendererClass)]
+[TypeWrapper(MappedClass.RendererClass)]
 public class Renderer : StaticWrapper<Renderer>
 {
 	public static void Initialize(RendererType type)
 	{
-		_ = CallStatic(RendererInitializeFunction, type)!;
+		_ = CallStatic(MappedFunction.RendererInitializeFunction, type);
 	}
 }

@@ -1,7 +1,9 @@
+using Kaizenpt.Consts;
 using Kaizenpt.Wrappers.Meta;
-using static Kaizenpt.Consts;
 
-[TypeWrapper("Maybe`1[[System.Int32, mscorlib]]")]
+namespace Kaizenpt.Wrappers;
+
+[TypeWrapper(MappedClass.MaybeIntClass)]
 internal sealed class MaybeInt : NonStaticWrapper<MaybeInt>
 {
 	internal MaybeInt(object inner)
@@ -9,16 +11,16 @@ internal sealed class MaybeInt : NonStaticWrapper<MaybeInt>
 
 	public bool IsSome()
 	{
-		return (bool)Call(MaybeIsSomeFunction)!;
+		return (bool)Call(MappedFunction.MaybeIntIsSomeFunction)!;
 	}
 
 	public int Unwrap()
 	{
-		return (int)Call(MaybeUnwrapFunction)!;
+		return (int)Call(MappedFunction.MaybeIntUnwrapFunction)!;
 	}
 }
 
-[TypeWrapper("Maybe`1[[Solution, Game]]")]
+[TypeWrapper(MappedClass.MaybeSolutionClass)]
 internal sealed class MaybeSolution : NonStaticWrapper<MaybeSolution>
 {
 	internal MaybeSolution(object inner)
@@ -26,11 +28,11 @@ internal sealed class MaybeSolution : NonStaticWrapper<MaybeSolution>
 
 	public bool IsSome()
 	{
-		return (bool)Call(MaybeIsSomeFunction)!;
+		return (bool)Call(MappedFunction.MaybeSolutionIsSomeFunction)!;
 	}
 
 	public object Unwrap()
 	{
-		return Call(MaybeUnwrapFunction)!;
+		return Call(MappedFunction.MaybeSolutionUnwrapFunction)!;
 	}
 }
